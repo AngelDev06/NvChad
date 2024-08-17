@@ -46,7 +46,7 @@ end
 
 local options = {
   completion = {
-    completeopt = "menu,menuone",
+    completeopt = "menu,menuone,noselect,noinsert",
   },
 
   window = {
@@ -107,6 +107,7 @@ local options = {
     { name = "buffer" },
     { name = "nvim_lua" },
     { name = "path" },
+    { name = "nvim_lsp_signature_help" }
   },
 }
 

@@ -146,7 +146,16 @@ return {
           disable_filetype = { "TelescopePrompt", "vim" },
         },
         config = function(_, opts)
-          require("nvim-autopairs").setup(opts)
+          local npairs = require("nvim-autopairs")
+          local Rule = require("nvim-autopairs.rule")
+          npairs.setup(opts)
+
+          npairs.add_rules({
+            Rule("/*", "*/", { "c", "cpp" })
+                :replace_map_cr(function()
+                  return "<C-g>u<CR><CR><C-u><Up><end><space>"
+                end)
+          })
 
           -- setup cmp for autopairs
           local cmp_autopairs = require "nvim-autopairs.completion.cmp"
@@ -161,6 +170,7 @@ return {
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-path",
+        "hrsh7th/cmp-nvim-lsp-signature-help"
       },
     },
     opts = function()
